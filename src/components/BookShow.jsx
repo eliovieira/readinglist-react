@@ -1,8 +1,10 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import BookEdit from "./BookEdit";
+import useBooksContext from "../hooks/use-hooks-context";
 
-const BookShow = ({ book, deleteBook, editBook }) => {
+const BookShow = ({ book }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const { deleteBook } = useBooksContext();
 
   const handleDelete = () => {
     deleteBook(book.id);
@@ -29,11 +31,7 @@ const BookShow = ({ book, deleteBook, editBook }) => {
       />
       {isEditing ? (
         <>
-          <BookEdit
-            book={book}
-            setIsEditing={setIsEditing}
-            editBook={editBook}
-          />
+          <BookEdit book={book} setIsEditing={setIsEditing} />
         </>
       ) : (
         <span className="cardTitle">{book.title}</span>

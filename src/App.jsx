@@ -1,57 +1,23 @@
-import { useState } from "react";
+import { useEffect, useContext } from "react";
 
+//context
+import BooksContext from "./context/books";
 //components
 import BookList from "./components/BookList";
 import BookCreate from "./components/BookCreate";
 
 function App() {
-  const [counter, setCounter] = useState(4);
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "Harry Potter",
-    },
-    {
-      id: 2,
-      title: "Dark Tower",
-    },
-    {
-      id: 3,
-      title: "Hunger Games",
-    },
-  ]);
+  const { getBooks } = useContext(BooksContext);
 
-  const createBook = (title) => {
-    setBooks((books) => [
-      ...books,
-      {
-        id: counter,
-        title: title,
-      },
-    ]);
-    setCounter(counter + 1);
-    console.log(books);
-  };
+  useEffect(() => {
+    getBooks();
+  }, []);
 
-  const deleteBook = (id) => {
-    setBooks(books.filter((book) => book.id !== id));
-  };
-
-  const editBook = (id, newTitle) => {
-    const newBooks = books.map((book) => {
-      if (book.id === id) {
-        return { ...book, title: newTitle };
-      }
-      return book;
-    });
-
-    setBooks(newBooks);
-  };
   return (
     <div className="app">
       <h1>Reading List</h1>
-      <BookList books={books} deleteBook={deleteBook} editBook={editBook} />
-      <BookCreate createBook={createBook} />
+      <BookList />
+      <BookCreate />
     </div>
   );
 }

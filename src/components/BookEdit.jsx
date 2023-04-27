@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from "react";
+import useBooksContext from "../hooks/use-hooks-context";
 
-const BookEdit = ({ book, setIsEditing, editBook }) => {
+const BookEdit = ({ book, setIsEditing }) => {
   const [newTitle, setNewTitle] = useState(book.title);
+  const { editBook } = useBooksContext();
   const inputRef = useRef(null);
 
   useEffect(() => {

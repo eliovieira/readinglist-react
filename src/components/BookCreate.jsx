@@ -1,7 +1,9 @@
 import { useRef, useState, useEffect } from "react";
+import useBooksContext from "../hooks/use-hooks-context";
 
-const BookCreate = ({ createBook }) => {
+const BookCreate = () => {
   const [title, setTitle] = useState("");
+  const { createBook } = useBooksContext();
   const inputRef = useRef(null);
   useEffect(() => {
     inputRef.current.focus();
